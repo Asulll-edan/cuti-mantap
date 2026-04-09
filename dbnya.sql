@@ -1,14 +1,10 @@
--- ==========================================
--- 1. DEFINISI TIPE DATA CUSTOM (ENUM)
--- ==========================================
+
 CREATE TYPE user_role AS ENUM ('admin', 'manager', 'karyawan');
 CREATE TYPE leave_status AS ENUM ('pending', 'approved', 'rejected');
 CREATE TYPE gender_type AS ENUM ('Laki-laki', 'Perempuan');
 CREATE TYPE emp_status AS ENUM ('Tetap', 'Kontrak', 'Probation');
 
--- ==========================================
--- 2. TABEL MASTER (REFERENSI)
--- ==========================================
+
 
 -- Menyimpan daftar Departemen/Jabatan (IT, Digital Marketing, HRD, dll)
 CREATE TABLE jabatan (
@@ -24,9 +20,6 @@ CREATE TABLE jenis_cuti (
     keterangan TEXT
 );
 
--- ==========================================
--- 3. TABEL UTAMA (PENGGUNA)
--- ==========================================
 
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -49,9 +42,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ==========================================
--- 4. TABEL TRANSAKSI & LOGIKA
--- ==========================================
 
 -- Monitoring sisa jatah cuti tahunan per karyawan
 CREATE TABLE kuota_cuti (
