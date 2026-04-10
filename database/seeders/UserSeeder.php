@@ -20,7 +20,6 @@ class UserSeeder extends Seeder
                 'status_karyawan'  => 'Karyawan Tetap',
                 'jenis_kelamin'    => 'Laki-Laki',
                 'divisi'           => 'IT',
-                'cabang'           => 'PT. Akur Pratama Yogya Center',
                 'created_at'       => now(),
                 'updated_at'       => now(),
             ]
