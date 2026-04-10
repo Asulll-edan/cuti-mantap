@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
@@ -66,99 +66,10 @@
     <div class="brand-title">YoLeave</div>
   </div>
 
-  <div class="card">
-    <div class="tab-bar">
-      <button class="tab active" id="tab-login" onclick="switchTab('login')">Masuk</button>
-      <button class="tab" id="tab-register" onclick="switchTab('register')">Daftar</button>
-    </div>
-
     <!-- LOGIN -->
-    <div class="section visible" id="sec-login">
-      <div class="form-group">
-        <label>NIP</label>
-        <input type="text" placeholder="Masukkan NIP karyawan" />
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" placeholder="Masukkan password" />
-      </div>
-      <button class="btn-submit">Masuk</button>
-      <div class="link-row">Lupa password? <span>Reset password</span></div>
-    </div>
+   @yield('formLog')
 
     <!-- REGISTER -->
-    <div class="section" id="sec-register">
-
-      <div class="section-label">Data Pribadi</div>
-
-      <div class="form-group">
-        <label>NIP</label>
-        <input type="text" placeholder="Nomor Induk Pegawai" />
-      </div>
-
-      <div class="form-group">
-        <label>Nama Lengkap</label>
-        <input type="text" placeholder="Nama sesuai KTP" />
-      </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>Jenis Kelamin</label>
-          <select>
-            <option value="">Pilih</option>
-            <option>Laki-laki</option>
-            <option>Perempuan</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>Role / Jabatan</label>
-          <select>
-            <option value="">Pilih role</option>
-            <option>Karyawan</option>
-            <option>Supervisor</option>
-            <option>Manager</option>
-            <option>HR</option>
-            <option>Admin</option>
-          </select>
-        </div>
-      </div>
-
-      <hr class="divider" />
-      <div class="section-label">Informasi Akun</div>
-
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="email@yogyagroup.co.id" />
-      </div>
-
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" placeholder="Min. 8 karakter" />
-      </div>
-
-      <div class="form-group">
-        <label>Konfirmasi Password</label>
-        <input type="password" placeholder="Ulangi password" />
-      </div>
-
-      <hr class="divider" />
-      <div class="section-label">Status Karyawan</div>
-
-      <div class="form-group">
-        <label>Status</label>
-        <select>
-          <option value="">Pilih status</option>
-          <option>Karyawan Tetap</option>
-          <option>Kontrak</option>
-          <option>Paruh Waktu</option>
-          <option>Magang</option>
-        </select>
-      </div>
-
-      <button class="btn-submit">Daftar Sekarang</button>
-      <div class="link-row">Sudah punya akun? <span onclick="switchTab('login')">Masuk di sini</span></div>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -169,5 +80,69 @@
     document.getElementById('tab-register').classList.toggle('active', tab === 'register');
   }
 </script>
+</body>
+</html> --}}
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YoLeave |</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        yogya: {
+                            green:  '#1a7a3c',
+                            green2: '#2d9e54',
+                            orange: '#e85d2a',
+                            yellow: '#f5a623',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    @stack('styles')
+</head>
+<body class="antialiased font-sans">
+
+<div class="min-h-screen flex flex-col items-center justify-start px-4 py-10"
+     style="background: linear-gradient(160deg, #1a7a3c 0%, #2d9e54 35%, #f5a623 70%, #e85d2a 100%);">
+
+    {{-- Logo & Brand --}}
+    <div class="flex flex-col items-center gap-2 mb-8">
+        <img src="{{ asset('assets/Yogya_Group.png') }}" alt="Yogya Group"
+             class="w-16 h-16 object-contain drop-shadow-lg" />
+        <p class="text-white text-xl font-medium tracking-wide">YoLeave</p>
+    </div>
+
+    {{-- Card --}}
+    <div class="bg-white/95 rounded-2xl shadow-2xl w-full max-w-md px-7 py-7">
+
+        {{-- Tab Bar --}}
+        <div class="flex rounded-xl overflow-hidden border border-gray-200 mb-6">
+            <a href='/login'
+               class="flex-1 py-2.5 text-sm font-medium text-center transition-colors duration-200
+                      {{ request()->routeIs('login') ? 'bg-yogya-green text-white' : 'bg-gray-100 text-gray-400 hover:bg-gray-200' }}">
+                Masuk
+            </a>
+            <a href='/register'
+               class="flex-1 py-2.5 text-sm font-medium text-center transition-colors duration-200
+                      {{ request()->routeIs('register') ? 'bg-yogya-green text-white' : 'bg-gray-100 text-gray-400 hover:bg-gray-200' }}">
+                Daftar
+            </a>
+        </div>
+
+        {{-- Konten halaman (login / register) --}}
+        @yield('form')
+
+    </div>
+</div>
+
+@stack('scripts')
 </body>
 </html>

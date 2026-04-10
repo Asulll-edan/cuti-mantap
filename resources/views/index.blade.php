@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Leave</title>
+    <title>YoLeave</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="antialiased">
@@ -20,7 +20,7 @@
 
                 <div class="column items-center justify-center space-x-3">
                     <img src="assets/Yogya_Group.png" alt="YoLeave Logo" class="h-16 w-16">
-                    <a href="/home" class="text-5xl font-extrabold text-emerald-900">Masuk</a>
+                    <a href="/login" class="text-5xl font-extrabold text-emerald-900">Masuk</a>
                 </div>
                 
                 <p class="text-sm text-gray-700 font-medium">Platform Manajemen Cuti Karyawan</p>
