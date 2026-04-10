@@ -1,72 +1,104 @@
-@extends('auth.mainAuth')
+{{-- resources/views/auth/login.blade.php --}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Absent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Alegreya Sans SC', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center">
 
-@section('title', 'Masuk')
+  <div class="bg-white/99 rounded-xl shadow-md p-8 w-full max-w-sm">
 
-@section('form')
+    {{-- Logo --}}
+    <div class="flex justify-center mb-6">
+      <img src="{{ asset('assets/Yogya_Group.png') }}" alt="Logo" class="h-16 w-auto">
+    </div>
 
-    <form action="#" method="POST" class="space-y-4">
-        @csrf
+    
+    <p class="text-black/20 text-sm font-medium mb-1">Welcome to absent</p>
+    <p class="text-black/20 text-xs mb-6">Enter email and password to login</p>
 
-        {{-- NIP --}}
-        <div>
-            <label for="nip" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                NIP
-            </label>
-            <input
-                id="nip"
-                type="text"
-                name="nip"
-                value="{{ old('nip') }}"
-                placeholder="Masukkan NIP karyawan"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('nip') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('nip')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+    {{-- Form --}}
+    <form method="POST" action="{{ route('login') }}">
+      @csrf
+
+    
+      <div class="mb-4">
+        <label class="block text-black/20 text-xs mb-1">NIP</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-3 flex items-center opacity-25">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </span>
+          <input
+            type="text"
+            name="nip"
+            value="{{ old('nip') }}"
+            placeholder="Masukkan NIP"
+            class="w-full border border-black/15 rounded pl-9 pr-3 py-2 text-xs text-black/20 focus:outline-none focus:ring-2 focus:ring-green-400"
+          >
         </div>
+        @error('nip')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- Password --}}
-        <div>
-            <label for="password" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Password
-            </label>
-            <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Masukkan password"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('password') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('password')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+      
+      <div class="mb-2">
+        <label class="block text-black/20 text-xs mb-1">Password</label>
+        <div class="relative">
+          <span class="absolute inset-y-0 left-3 flex items-center opacity-25">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+            </svg>
+          </span>
+          <input
+            type="password"
+            name="password"
+            placeholder="Masukkan password"
+            class="w-full border border-black/15 rounded pl-9 pr-3 py-2 text-xs text-black/20 focus:outline-none focus:ring-2 focus:ring-green-400"
+          >
         </div>
+        @error('password')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- Submit --}}
-        <div class="pt-1">
-            <button type="submit"
-                    class="w-full py-2.5 rounded-xl text-white text-sm font-medium tracking-wide
-                           transition hover:opacity-90"
-                    style="background: linear-gradient(90deg, #e85d2a, #f5a623);">
-                Masuk
-            </button>
-        </div>
+   
+      <div class="flex justify-end mb-5">
+        <a href="{{ route('password.request') }}" class="text-black/20 text-xs hover:underline">
+          forgot password?
+        </a>
+      </div>
 
-        {{-- Lupa password --}}
-        <p class="text-center text-xs text-gray-400 pt-1">
-            Lupa password?
-            <a href="#"
-               class="text-yogya-green font-medium hover:underline">
-                Reset password
-            </a>
-        </p>
+      
+      <button
+        type="submit"
+        class="w-full bg-[#7AE378] text-white font-bold text-sm rounded-md py-2 hover:bg-green-500 transition-colors"
+      >
+        Login
+      </button>
 
     </form>
 
-@endsection
+     
+    <p class="text-center text-black/20 text-xs mt-4">
+      Belum punya akun?
+      <a href="{{ route('register') }}" class="text-green-500 hover:underline font-medium">
+        Daftar di sini
+      </a>
+    </p>
+
+  </div>
+
+</body>
+</html>

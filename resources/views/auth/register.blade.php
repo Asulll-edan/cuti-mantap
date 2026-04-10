@@ -1,232 +1,179 @@
-@extends('auth.mainAuth')
+{{-- resources/views/auth/register.blade.php --}}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register - Absent</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Alegreya Sans SC', sans-serif; }
+  </style>
+</head>
+<body class="min-h-screen bg-gray-100 flex items-center justify-center py-8">
 
-@section('title', 'Daftar')
+  <div class="bg-white/99 rounded-xl shadow-md p-8 w-full max-w-sm">
 
-@section('form')
+    {{-- Logo --}}
+    <div class="flex justify-center mb-6">
+      <img src="{{ asset('assets/Yogya_Group.png') }}" alt="Logo" class="h-16 w-auto">
+    </div>
 
-    <form action="#" method="POST" class="space-y-4">
-        @csrf
+    {{-- Heading --}}
+    <p class="text-black/20 text-sm font-medium mb-5">Create an account</p>
 
-        {{-- ── DATA PRIBADI ── --}}
-        <p class="text-[10px] font-semibold text-yogya-green tracking-[1.5px] uppercase
-                   border-b border-green-100 pb-1.5">
-            Data Pribadi
-        </p>
+    {{-- Form --}}
+    <form method="POST" action="{{ route('register') }}">
+      @csrf
 
-        {{-- NIP --}}
-        <div>
-            <label for="nip" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                NIP
-            </label>
-            <input
-                id="nip"
-                type="text"
-                name="nip"
-                value="{{ old('nip') }}"
-                placeholder="Nomor Induk Pegawai"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('nip') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('nip')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+      {{-- Nama --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">Nama</label>
+        <input
+          type="text"
+          name="nama"
+          value="{{ old('nama') }}"
+          placeholder="Masukkan nama lengkap"
+          class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+        @error('nama')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      {{-- E-Mail --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">E-Mail</label>
+        <input
+          type="email"
+          name="email"
+          value="{{ old('email') }}"
+          placeholder="Masukkan email"
+          class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+        @error('email')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      {{-- NIP --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">NIP</label>
+        <input
+          type="text"
+          name="nip"
+          value="{{ old('nip') }}"
+          placeholder="Masukkan NIP"
+          class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+        @error('nip')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
+
+      {{-- Status Karyawan --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">Status Karyawan</label>
+        <div class="relative">
+          <select
+            name="status_karyawan"
+            class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
+          >
+            <option value="" disabled {{ old('status_karyawan') ? '' : 'selected' }}>Pilih status</option>
+            <option value="tetap"     {{ old('status_karyawan') == 'tetap'     ? 'selected' : '' }}>Karyawan Tetap</option>
+            <option value="kontrak"   {{ old('status_karyawan') == 'kontrak'   ? 'selected' : '' }}>Karyawan Kontrak</option>
+            <option value="magang"    {{ old('status_karyawan') == 'magang'    ? 'selected' : '' }}>Magang</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 10l5 5 5-5H7z"/>
+            </svg>
+          </div>
         </div>
+        @error('status_karyawan')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- Nama Lengkap --}}
-        <div>
-            <label for="name" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Nama Lengkap
-            </label>
-            <input
-                id="name"
-                type="text"
-                name="name"
-                value="{{ old('name') }}"
-                placeholder="Nama sesuai KTP"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('name') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('name')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
+      {{-- Role --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">Role</label>
+        <div class="relative">
+          <select
+            name="role"
+            class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
+          >
+            <option value="" disabled {{ old('role') ? '' : 'selected' }}>Pilih role</option>
+            <option value="admin"    {{ old('role') == 'admin'    ? 'selected' : '' }}>Admin</option>
+            <option value="karyawan" {{ old('role') == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 10l5 5 5-5H7z"/>
+            </svg>
+          </div>
         </div>
+        @error('role')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- Jenis Kelamin & Role (berdampingan) --}}
-        <div class="flex gap-3">
-
-            {{-- Jenis Kelamin --}}
-            <div class="flex-1">
-                <label for="gender" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                    Jenis Kelamin
-                </label>
-                <div class="relative">
-                    <select
-                        id="gender"
-                        name="gender"
-                        required
-                        class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                               appearance-none transition focus:outline-none focus:bg-white pr-8
-                               {{ $errors->has('gender') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-                    >
-                        <option value="">Pilih</option>
-                        <option value="L" {{ old('gender') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                        <option value="P" {{ old('gender') == 'P' ? 'selected' : '' }}>Perempuan</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▾</span>
-                </div>
-                @error('gender')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
-            {{-- Role --}}
-            <div class="flex-1">
-                <label for="role" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                    Role / Jabatan
-                </label>
-                <div class="relative">
-                    <select
-                        id="role"
-                        name="role"
-                        required
-                        class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                               appearance-none transition focus:outline-none focus:bg-white pr-8
-                               {{ $errors->has('role') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-                    >
-                        <option value="">Pilih role</option>
-                        <option value="karyawan"   {{ old('role') == 'karyawan'   ? 'selected' : '' }}>Karyawan</option>
-                        <option value="supervisor" {{ old('role') == 'supervisor' ? 'selected' : '' }}>Supervisor</option>
-                        <option value="manager"    {{ old('role') == 'manager'    ? 'selected' : '' }}>Manager</option>
-                        <option value="hr"         {{ old('role') == 'hr'         ? 'selected' : '' }}>HR</option>
-                        <option value="admin"      {{ old('role') == 'admin'      ? 'selected' : '' }}>Admin</option>
-                    </select>
-                    <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▾</span>
-                </div>
-                @error('role')
-                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                @enderror
-            </div>
-
+      {{-- Jenis Kelamin --}}
+      <div class="mb-3">
+        <label class="block text-black/20 text-xs mb-1">Jenis Kelamin</label>
+        <div class="relative">
+          <select
+            name="jenis_kelamin"
+            class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
+          >
+            <option value="" disabled {{ old('jenis_kelamin') ? '' : 'selected' }}>Pilih jenis kelamin</option>
+            <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
+            <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M7 10l5 5 5-5H7z"/>
+            </svg>
+          </div>
         </div>
+        @error('jenis_kelamin')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- ── INFORMASI AKUN ── --}}
-        <hr class="border-gray-100" />
-        <p class="text-[10px] font-semibold text-yogya-green tracking-[1.5px] uppercase
-                   border-b border-green-100 pb-1.5">
-            Informasi Akun
-        </p>
+      {{-- Password --}}
+      <div class="mb-5">
+        <label class="block text-black/20 text-xs mb-1">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Masukkan password"
+          class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+        >
+        @error('password')
+          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+        @enderror
+      </div>
 
-        {{-- Email --}}
-        <div>
-            <label for="email" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Email
-            </label>
-            <input
-                id="email"
-                type="email"
-                name="email"
-                value="{{ old('email') }}"
-                placeholder="email@yogyagroup.co.id"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('email') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('email')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        {{-- Password --}}
-        <div>
-            <label for="password" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Password
-            </label>
-            <input
-                id="password"
-                type="password"
-                name="password"
-                placeholder="Min. 8 karakter"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                       transition focus:outline-none focus:bg-white
-                       {{ $errors->has('password') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-            />
-            @error('password')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        {{-- Konfirmasi Password --}}
-        <div>
-            <label for="password_confirmation" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Konfirmasi Password
-            </label>
-            <input
-                id="password_confirmation"
-                type="password"
-                name="password_confirmation"
-                placeholder="Ulangi password"
-                required
-                class="w-full px-3 py-2.5 rounded-lg border border-gray-200 bg-gray-50 text-sm text-gray-800
-                       transition focus:outline-none focus:border-yogya-green focus:bg-white"
-            />
-        </div>
-
-        {{-- ── STATUS KARYAWAN ── --}}
-        <hr class="border-gray-100" />
-        <p class="text-[10px] font-semibold text-yogya-green tracking-[1.5px] uppercase
-                   border-b border-green-100 pb-1.5">
-            Status Karyawan
-        </p>
-
-        <div>
-            <label for="status" class="block text-xs font-medium text-gray-500 mb-1.5 tracking-wide">
-                Status
-            </label>
-            <div class="relative">
-                <select
-                    id="status"
-                    name="status"
-                    required
-                    class="w-full px-3 py-2.5 rounded-lg border text-sm text-gray-800 bg-gray-50
-                           appearance-none transition focus:outline-none focus:bg-white pr-8
-                           {{ $errors->has('status') ? 'border-red-400' : 'border-gray-200 focus:border-yogya-green' }}"
-                >
-                    <option value="">Pilih status</option>
-                    <option value="tetap"    {{ old('status') == 'tetap'    ? 'selected' : '' }}>Karyawan Tetap</option>
-                    <option value="kontrak"  {{ old('status') == 'kontrak'  ? 'selected' : '' }}>Kontrak</option>
-                    <option value="paruh"    {{ old('status') == 'paruh'    ? 'selected' : '' }}>Paruh Waktu</option>
-                    <option value="magang"   {{ old('status') == 'magang'   ? 'selected' : '' }}>Magang</option>
-                </select>
-                <span class="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 text-xs">▾</span>
-            </div>
-            @error('status')
-                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        {{-- Submit --}}
-        <div class="pt-1">
-            <button type="submit"
-                    class="w-full py-2.5 rounded-xl text-white text-sm font-medium tracking-wide
-                           transition hover:opacity-90"
-                    style="background: linear-gradient(90deg, #e85d2a, #f5a623);">
-                Daftar Sekarang
-            </button>
-        </div>
-
-        <p class="text-center text-xs text-gray-400 pt-1">
-            Sudah punya akun?
-            <a href="{{ route('login') }}" class="text-yogya-green font-medium hover:underline">
-                Masuk di sini
-            </a>
-        </p>
+      {{-- Submit --}}
+      <button
+        type="submit"
+        class="w-full bg-[#7AE378] text-white font-bold text-sm rounded-md py-2 hover:bg-green-500 transition-colors"
+      >
+        Register
+      </button>
 
     </form>
 
-@endsection
+
+    {{-- Already have account --}}
+    <p class="text-center text-black/20 text-xs mt-4">
+      Already have an account?
+      <a href="{{ route('login') }}" class="text-green-500 hover:underline font-medium">Login</a>
+    </p>
+
+  </div>
+
+</body>
+</html>

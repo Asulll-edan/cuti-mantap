@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
 
 Route::get('/', function () {
     return view('index');
@@ -27,12 +26,15 @@ Route::get('/login', function(){
 }, );
 
 
-
 Route::get('/register', function(){
     return view('auth.register',
     ['title'=>'register']);
 });
 
+Route::get('/home', function(){
+    return view('auth.home',
+    ['title'=>'home']);
+});
 
 Auth::routes();
 
