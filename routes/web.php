@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
 
 /*
@@ -14,28 +15,14 @@ use Illuminate\Support\Facades\Auth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::redirect('/home','/profile');
 
 Route::get('/', function () {
     return view('index');
 });
 
 
-Route::get('/login', function(){
-    return view('auth.login',[
-        'title' => 'login']);
-}, );
-
-
-Route::get('/register', function(){
-    return view('auth.register',
-    ['title'=>'register']);
-});
-
-Route::get('/home', function(){
-    return view('auth.home',
-    ['title'=>'home']);
-});
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');

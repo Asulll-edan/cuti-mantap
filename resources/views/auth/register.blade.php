@@ -32,12 +32,12 @@
         <label class="block text-black/20 text-xs mb-1">Nama</label>
         <input
           type="text"
-          name="nama"
-          value="{{ old('nama') }}"
+          name="name"
+          value="{{ old('name') }}"
           placeholder="Masukkan nama lengkap"
           class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
         >
-        @error('nama')
+        @error('name')
           <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
         @enderror
       </div>
@@ -81,9 +81,9 @@
             class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
           >
             <option value="" disabled {{ old('status_karyawan') ? '' : 'selected' }}>Pilih status</option>
-            <option value="tetap"     {{ old('status_karyawan') == 'tetap'     ? 'selected' : '' }}>Karyawan Tetap</option>
-            <option value="kontrak"   {{ old('status_karyawan') == 'kontrak'   ? 'selected' : '' }}>Karyawan Kontrak</option>
-            <option value="magang"    {{ old('status_karyawan') == 'magang'    ? 'selected' : '' }}>Magang</option>
+            <option value="Tetap" {{ old('status_karyawan') == 'Tetap' ? 'selected' : '' }}>Karyawan Tetap</option>
+            <option value="Kontrak" {{ old('status_karyawan') == 'Kontrak' ? 'selected' : '' }}>Karyawan Kontrak</option>
+            <option value="Probation" {{ old('status_karyawan') == 'Probation' ? 'selected' : '' }}>Magang</option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
@@ -105,7 +105,7 @@
             class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
           >
             <option value="" disabled {{ old('role') ? '' : 'selected' }}>Pilih role</option>
-            <option value="admin"    {{ old('role') == 'admin'    ? 'selected' : '' }}>Admin</option>
+            <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
             <option value="karyawan" {{ old('role') == 'karyawan' ? 'selected' : '' }}>Karyawan</option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
@@ -128,8 +128,8 @@
             class="w-full appearance-none border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400 bg-white"
           >
             <option value="" disabled {{ old('jenis_kelamin') ? '' : 'selected' }}>Pilih jenis kelamin</option>
-            <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki</option>
-            <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan</option>
+            <option value="Laki-laki" {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+            <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
           </select>
           <div class="pointer-events-none absolute inset-y-0 right-3 flex items-center opacity-80">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-800" viewBox="0 0 24 24" fill="currentColor">
@@ -142,19 +142,30 @@
         @enderror
       </div>
 
-      {{-- Password --}}
-      <div class="mb-5">
-        <label class="block text-black/20 text-xs mb-1">Password</label>
-        <input
-          type="password"
-          name="password"
-          placeholder="Masukkan password"
-          class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
-        >
-        @error('password')
-          <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-        @enderror
-      </div>
+     {{-- Password --}}
+<div class="mb-3">
+  <label class="block text-black/20 text-xs mb-1">Password</label>
+  <input
+    type="password"
+    name="password"
+    placeholder="Masukkan password"
+    class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+  >
+  @error('password')
+    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+  @enderror
+</div>
+
+{{-- Konfirmasi Password --}}
+<div class="mb-5">
+  <label class="block text-black/20 text-xs mb-1">Konfirmasi Password</label>
+  <input
+    type="password"
+    name="password_confirmation"
+    placeholder="Konfirmasi password"
+    class="w-full border border-black/15 rounded px-3 py-2 text-xs text-black/40 focus:outline-none focus:ring-2 focus:ring-green-400"
+  >
+</div>
 
       {{-- Submit --}}
       <button
@@ -165,7 +176,6 @@
       </button>
 
     </form>
-
 
     {{-- Already have account --}}
     <p class="text-center text-black/20 text-xs mt-4">
